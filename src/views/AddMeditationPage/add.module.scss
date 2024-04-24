@@ -1,0 +1,77 @@
+@use "sass:map";
+@import "../../assets/styles/variables";
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 50px;
+  margin-bottom: 2vh;
+  height: 83vh;
+  gap: 20px;
+
+  div,
+  span {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 22vw;
+    font-size: 20px;
+
+    textarea,
+    select {
+      width: 100%;
+      border-style: none;
+      //color: map.get($colors, faint-grey);
+      border-bottom: 1px solid map.get($colors, faint-grey);
+      border-radius: 0;
+      font-size: 20px;
+      resize: none;
+
+      option {
+        color: map.get($colors, faint-grey);
+      }
+
+      option:first-of-type {
+        color: map.get($colors, black);
+      }
+    }
+
+    select {
+      color: map.get($colors, faint-grey);
+    }
+
+    ::placeholder {
+      color: map.get($colors, faint-grey);
+    }
+  }
+}
+
+.fileUpload {
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 22vw;
+  height: 15vh;
+  font-size: 20px;
+  background-color: map.get($colors, light);
+  border-color: map.get($colors, light-grey);
+  border-width: 1px;
+  border-style: dashed;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.confirmButton {
+  width: 22vw;
+  height: 15vh;
+  background-color: map.get($colors, violet);
+  color: map.get($colors, white);
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.emptyText {
+  color: map.get($colors, white);
+}

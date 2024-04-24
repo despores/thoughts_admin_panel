@@ -1,0 +1,67 @@
+@use "sass:math";
+
+$colors: (
+  black: #111111,
+  dark-grey: #575757,
+  white: #ffffff,
+  violet: #c979be,
+  success: #90ebdf,
+  danger: #f0a6a6,
+  light-grey: #dadada,
+  light: #f7f3f3,
+  faint-grey: #a5a4a4,
+  blueish: #6f72a1,
+);
+
+$fontSize: 16px;
+
+@function stripUnit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return math.div($number, ($number * 0 + 1));
+  }
+  @return $number;
+}
+
+@function calcFluidFontSize(
+  $fontMin,
+  $fontMax,
+  $widthMin,
+  $widthMax,
+  $units: px
+) {
+  $fontMin: stripUnit($fontMin);
+  $fontMax: stripUnit($fontMax);
+  $widthMin: stripUnit($widthMin);
+  $widthMax: stripUnit($widthMax);
+
+  $k: calc(($fontMax - $fontMin) / ($widthMax - $widthMin)); //0.0125
+  $b: $fontMin - $k * $widthMin; // 8
+
+  $b: $b + $units;
+
+  @return calc(#{$k} * 100vw + #{$b});
+}
+
+/**
+* font-size = viewport > $widthMax ? $fontMax : viewport < $widthMin ? $fontMin : fluid
+* $fallback - initial value for old browsers (without support of vw units)
+**/
+@mixin fluidFontSize(
+  $fontMin,
+  $fontMax,
+  $widthMin,
+  $widthMax,
+  $fallback: false
+) {
+  font-size: $fontMin;
+
+  @media (min-width: $widthMin) {
+    @if ($fallback) {
+      font-size: $fallback;
+    }
+    font-size: calcFluidFontSize($fontMin, $fontMax, $widthMin, $widthMax, px);
+  }
+  @media (min-width: $widthMax) {
+    font-size: $fontMax;
+  }
+}

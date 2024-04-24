@@ -1,0 +1,49 @@
+@use "sass:map";
+@import "../../assets/styles/variables";
+
+.content {
+  padding-top: 50px;
+  margin-bottom: 2vh;
+  height: 83vh;
+  gap: 20px;
+  padding: 30px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 50vw;
+    font-size: 20px;
+
+    textarea {
+      width: 100%;
+      border-style: none;
+      //color: map.get($colors, faint-grey);
+      border-bottom: 1px solid map.get($colors, faint-grey);
+      border-radius: 0;
+      font-size: 20px;
+      resize: none;
+
+      option {
+        color: map.get($colors, faint-grey);
+      }
+
+      option:first-of-type {
+        color: map.get($colors, black);
+      }
+    }
+
+    ::placeholder {
+      color: map.get($colors, faint-grey);
+    }
+
+    button {
+      width: 22vw;
+      height: 50px;
+      background-color: map.get($colors, violet);
+      border-style: none;
+      color: map.get($colors, white);
+      cursor: pointer;
+    }
+  }
+}

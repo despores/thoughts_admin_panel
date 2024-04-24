@@ -1,0 +1,31 @@
+@use "sass:map";
+@import "../../assets/styles/variables";
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  margin-bottom: 2vh;
+  height: 83vh;
+  gap: 30px;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 12vh;
+    width: 93vw;
+    background-color: map.get($colors, light);
+    gap: 10px;
+    border-color: map.get($colors, light-grey);
+    border-width: 1px;
+    border-style: dashed;
+    border-radius: 20px;
+    p {
+      font-size: 25px;
+
+      color: map.get($colors, faint-grey);
+    }
+  }
+}

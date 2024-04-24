@@ -1,0 +1,13 @@
+@use "sass:map";
+@import "../../assets/styles/variables";
+
+.content {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  border: solid 1px map.get($colors, violet);
+  gap: 10px;
+  margin: 10px;
+}

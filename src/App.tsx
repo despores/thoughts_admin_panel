@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import * as styles from "./app.module.scss";
+import * as commonStyles from "./assets/styles/common.module.scss";
+//import * as commonStyles from "./assets/styles/common.module.scss";
+import AppRoutes from "./routes/routes";
+import { BrowserRouter as Router, useLocation } from "react-router-dom";
+import Header from "./layout/Header/header";
+
+function MainContent() {
+  const location = useLocation();
+
+  return (
+    <div className={styles.wrapper}>
+      {location.pathname === "/login" ? <></> : <Header />}
+      <main className={[commonStyles.container, styles.content].join(" ")}>
+        <AppRoutes />
+      </main>
+    </div>
+  );
+}
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <MainContent />
+    </Router>
   );
 }
 

@@ -1,0 +1,61 @@
+@use "sass:map";
+@import "../../assets/styles/variables";
+
+.content {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  width: 44vw;
+  background-color: map.get($colors, light);
+  border-color: map.get($colors, light-grey);
+  border-width: 1px;
+  border-style: dashed;
+  border-radius: 20px;
+  margin: 10px;
+  text-decoration: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  margin-left: 15px;
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+}
+
+.category {
+  display: flex;
+  margin-right: 30px;
+
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 46px;
+  max-height: 100%;
+  background-color: map.get($colors, white);
+
+  p {
+    margin: 0 24px;
+    text-align: center;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
