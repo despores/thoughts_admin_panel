@@ -1,18 +1,28 @@
 import * as styles from "./login.module.scss";
-import * as commonStyles from "../../assets/styles/common.module.scss";
-import React from "react";
+import * as commonStyles from "../../theme/common.module.scss";
+import React, { useState } from "react";
 import Logo from "../../components/Logo/logo";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes/constants";
+import { authStore } from "../../core/store";
+import { observer } from "mobx-react-lite";
 
-
-function LoginPage() {
-
+const LoginPage: React.FC = observer(() => {
     const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-    const handleLogin = () => {
-        // Add your login logic here
-        navigate(ROUTES.MAIN);
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError("");
+
+        try {
+            await authStore.login(email, password);
+            navigate(ROUTES.MAIN);
+        } catch (err) {
+            setError("Invalid email or password");
+        }
     };
 
     return (
@@ -24,19 +34,34 @@ function LoginPage() {
             </nav>
             <div className={[commonStyles.box, styles.content].join(" ")}>
                 <p>Вход</p>
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleSubmit}>
                     <input
-                     type="text" 
-                     placeholder="Login" 
-                     aria-d
-                     />
-                    <input type="password" placeholder="Password" />
-                    <button onClick={handleLogin}>Login</button>
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        aria-label="Email"
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        aria-label="Password"
+                        required
+                    />
+                    <button
+                        type="submit"
+                        disabled={authStore.isAuthInProgress}
+                    >
+                        {authStore.isAuthInProgress ? "Logging in..." : "Login"}
+                    </button>
                 </form>
+                {error && <div className={styles.error}>{error}</div>}
             </div>
         </>
-
     );
-}
+});
 
 export default LoginPage;

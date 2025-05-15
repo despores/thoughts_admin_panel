@@ -1,8 +1,8 @@
 interface Achievement {
     id: number;
     title: string;
-    cover: string;
     description: string;
+    cover?: string;
 }
 
 export default Achievement;

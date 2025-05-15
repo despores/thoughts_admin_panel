@@ -111,4 +111,4 @@ export const achievementsMocks: Achievement[] = [
         cover: "../../assets/images/achievement-image.svg",
         description: "Описание достижения 6",
     },
-];
+]; 

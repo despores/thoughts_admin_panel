@@ -1,5 +1,7 @@
 import { makeAutoObservable } from "mobx";
-import AuthService from "./api.auth.js";
+import AuthService from "./api.auth";
+import { meditationsMocks } from "../assets/data/data";
+import Meditation from "../types/meditation";
 
 class AuthStore {   
   isAuth = false;
@@ -9,16 +11,16 @@ class AuthStore {
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
-  async login(email: any, password: any) {
+  async login(email: string, password: string) {
     this.isAuthInProgress = true;
     try {
       const resp = await AuthService.login(email, password);
       localStorage.setItem("token", resp.data.accessToken);
       this.isAuth = true;
-
-     } catch (err) {
-      console.log("login error");
-     } finally {
+    } catch (err) {
+      console.error("Login error:", err);
+      throw err;
+    } finally {
       this.isAuthInProgress = false;
     } 
   }
@@ -29,10 +31,10 @@ class AuthStore {
       const resp = await AuthService.refresh();
       localStorage.setItem("token", resp.data.accessToken);
       this.isAuth = true;
-
-     } catch (err) {
-      console.log("login error");
-     } finally {
+    } catch (err) {
+      console.error("Auth check error:", err);
+      throw err;
+    } finally {
       this.isAuthInProgress = false;
     } 
   }
@@ -44,12 +46,49 @@ class AuthStore {
       this.isAuth = false;
       localStorage.removeItem("token");
     } catch (err) {
-      console.log("logout error");
+      console.error("Logout error:", err);
+      throw err;
     } finally {
       this.isAuthInProgress = false;
     } 
   }
-  
 }
 
-export default new AuthStore();
+class MeditationStore {
+  items: Meditation[] = meditationsMocks;
+
+  constructor() {
+    makeAutoObservable(this, {}, { autoBind: true });
+  }
+
+  addItem(item: Meditation) {
+    this.items.push(item);
+  }
+
+  removeItem(id: number) {
+    this.items = this.items.filter(item => item.id !== id);
+  }
+
+  updateItem(id: number, data: Omit<Meditation, "id">) {
+    const index = this.items.findIndex(item => item.id === id);
+    if (index !== -1) {
+      this.items[index] = { ...data, id };
+    }
+  }
+}
+
+class RootStore {
+  authStore: AuthStore;
+  meditationStore: MeditationStore;
+
+  constructor() {
+    this.authStore = new AuthStore();
+    this.meditationStore = new MeditationStore();
+  }
+}
+
+export const store = new RootStore();
+export const { authStore, meditationStore } = store;
+export const addItem = meditationStore.addItem.bind(meditationStore);
+
+export default store;

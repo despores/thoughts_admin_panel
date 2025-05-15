@@ -1,5 +1,5 @@
 @use "sass:map";
-@import "../../assets/styles/variables";
+@import "../../theme/variables";
 
 .content {
   display: flex;
@@ -18,14 +18,35 @@
     width: 93vw;
     background-color: map.get($colors, light);
     gap: 10px;
-    border-color: map.get($colors, light-grey);
-    border-width: 1px;
-    border-style: dashed;
+    border: 1px dashed map.get($colors, light-grey);
     border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
     p {
       font-size: 25px;
-
       color: map.get($colors, faint-grey);
+      transition: color 0.3s ease;
+      margin: 0;
+    }
+
+    img {
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-color: map.get($colors, violet);
+      background-color: white;
+
+      p {
+        color: map.get($colors, violet);
+      }
+
+      img {
+        transform: scale(1.1) rotate(5deg);
+      }
     }
   }
 }

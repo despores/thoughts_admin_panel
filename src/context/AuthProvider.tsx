@@ -1,5 +1,5 @@
 import React from "react";
-import {createContext, useState } from "react";
+import { createContext, useState } from "react";
 
 // Определяем тип контекста
 type AuthContextType = {
@@ -18,7 +18,7 @@ const AuthContext = createContext<AuthContextType>({
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   // Используем хук useState для создания переменной isAuthenticated и функции setAuth для ее изменения
   const [isAuthenticated, setAuth] = useState<boolean>(false);
-  
+
   // Возвращаем контекст провайдера, передавая значения isAuthenticated и setAuth в качестве значения контекста
   return (
     <AuthContext.Provider value={{ isAuthenticated, setAuth }}>

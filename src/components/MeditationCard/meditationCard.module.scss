@@ -1,5 +1,5 @@
 @use "sass:map";
-@import "../../assets/styles/variables";
+@import "../../theme/variables";
 
 .content {
   display: inline-flex;
@@ -13,6 +13,14 @@
   border-radius: 20px;
   margin: 10px;
   text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    text-decoration: none;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: map.get($colors, violet);
+  }
 }
 
 .row {
@@ -24,6 +32,7 @@
 
   h1 {
     font-size: 20px;
+    transition: color 0.3s ease;
   }
 
   h2 {
@@ -34,13 +43,13 @@
 .category {
   display: flex;
   margin-right: 30px;
-
   align-items: center;
   justify-content: center;
   max-width: 100%;
   min-height: 46px;
   max-height: 100%;
   background-color: map.get($colors, white);
+  transition: background-color 0.3s ease;
 
   p {
     margin: 0 24px;
@@ -58,4 +67,16 @@
 
 a {
   text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+
+    .category {
+      background-color: map.get($colors, light);
+    }
+
+    h1 {
+      color: map.get($colors, violet);
+    }
+  }
 }

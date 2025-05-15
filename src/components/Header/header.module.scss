@@ -1,0 +1,113 @@
+@use "sass:map";
+@import "../../theme/variables.scss";
+
+$headerHeight: 15vh;
+
+.header {
+  height: $headerHeight;
+  background-color: map.get($colors, white);
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 50px;
+
+    .right {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      a {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        font-size: 30px;
+        text-decoration: none;
+        color: map.get($colors, text-grey);
+        transition: all 0.3s ease;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -5px;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background-color: map.get($colors, violet);
+          transition: all 0.3s ease;
+          transform: translateX(-50%);
+        }
+
+        &:hover {
+          color: map.get($colors, violet);
+
+          &::after {
+            width: 80%;
+          }
+
+          img {
+            transform: scale(1.1);
+          }
+        }
+
+        img {
+          transition: transform 0.3s ease;
+        }
+      }
+    }
+  }
+}
+
+.user {
+  background-color: map.get($colors, white);
+  color: map.get($colors, violet);
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+
+  a {
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    font-size: 14px;
+    color: map.get($colors, text-grey);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: map.get($colors, violet);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    &:hover {
+      color: map.get($colors, violet);
+
+      &::after {
+        width: 80%;
+      }
+    }
+
+    &.active {
+      color: map.get($colors, violet);
+
+      &::after {
+        width: 80%;
+      }
+    }
+  }
+}

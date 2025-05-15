@@ -1,19 +1,35 @@
-import { Navigate, Outlet, Route } from "react-router-dom";
-//import authStore from "./store.js";
+import React, { useEffect } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { authStore } from "../core/store";
+import { ROUTES } from "./constants";
 import { observer } from "mobx-react-lite";
-import React from "react";
 
-const PrivateRoute = () => {
+const PrivateRoute: React.FC = observer(() => {
+  const location = useLocation();
 
-  // if (authStore.isLoadingAuth) {
-  //   return <div>Checking auth...</div>;
-  // }
-  const isAuth = true;
-  if (isAuth) {
-    return <Outlet />;
-  } else {
-    return <Navigate to="/login" />;
+  useEffect(() => {
+    // Try to restore auth session when mounting private routes
+    if (!authStore.isAuth && !authStore.isAuthInProgress) {
+      const token = localStorage.getItem("token");
+      if (token) {
+        authStore.checkAuth().catch(() => {
+          // Token is invalid or expired, will redirect to login
+        });
+      }
+    }
+  }, []);
+
+  if (authStore.isAuthInProgress) {
+    // You might want to show a loading spinner here
+    return <div>Loading...</div>;
   }
-};
 
-export default observer(PrivateRoute);
+  if (!authStore.isAuth) {
+    // Redirect to login but save the attempted location
+    return <Navigate to={ROUTES.LOGIN} state={{ from: location }} replace />;
+  }
+
+  return <Outlet />;
+});
+
+export default PrivateRoute;

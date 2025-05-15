@@ -1,0 +1,10 @@
+@use "sass:map";
+@import "../../theme/variables";
+
+.achievementGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
+}

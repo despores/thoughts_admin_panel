@@ -1,0 +1,91 @@
+@use "sass:map";
+@import "../../theme/variables";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+
+  h2 {
+    font-size: 24px;
+    color: map.get($colors, violet);
+    margin: 0;
+  }
+}
+
+.formGroup {
+  width: 100%;
+
+  textarea {
+    width: 100%;
+    border-style: none;
+    border-bottom: 1px solid map.get($colors, faint-grey);
+    border-radius: 0;
+    font-size: 20px;
+    resize: none;
+    font-family: inherit;
+    padding: 10px 0;
+    background: transparent;
+
+    &::placeholder {
+      color: map.get($colors, faint-grey);
+    }
+  }
+}
+
+.errorInput {
+  border-bottom-color: map.get($colors, danger) !important;
+}
+
+.errorText {
+  color: map.get($colors, danger);
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.submitButton {
+  padding: 12px 30px;
+  background-color: map.get($colors, violet);
+  border: none;
+  color: map.get($colors, white);
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 8px;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    background-color: map.get($colors, faint-grey);
+    cursor: not-allowed;
+  }
+}
+
+.cancelButton {
+  padding: 12px 30px;
+  background-color: transparent;
+  border: 1px solid map.get($colors, faint-grey);
+  color: map.get($colors, dark-grey);
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: map.get($colors, light);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

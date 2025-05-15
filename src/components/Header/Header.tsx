@@ -1,13 +1,12 @@
-import * as commonStyles from "../../assets/styles/common.module.scss";
+import * as commonStyles from "../../theme/common.module.scss";
 import * as styles from "./header.module.scss";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import Logo from "../../components/Logo/logo";
+import Logo from "../Logo/logo";
 import { ROUTES } from "../../routes/constants";
 import personIcon from "../../assets/images/person-icon.svg";
 
 function Header() {
-
     const location = useLocation();
 
     return (
@@ -38,4 +37,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default Header; 

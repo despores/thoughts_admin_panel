@@ -1,5 +1,5 @@
 @use "sass:map";
-@import "../../assets/styles/variables";
+@import "../../theme/variables";
 
 .content {
   padding-top: 50px;
@@ -14,36 +14,55 @@
     gap: 30px;
     width: 50vw;
     font-size: 20px;
+  }
+}
 
-    textarea {
-      width: 100%;
-      border-style: none;
-      //color: map.get($colors, faint-grey);
-      border-bottom: 1px solid map.get($colors, faint-grey);
-      border-radius: 0;
-      font-size: 20px;
-      resize: none;
+.formGroup {
+  width: 100%;
 
-      option {
-        color: map.get($colors, faint-grey);
-      }
+  textarea {
+    width: 100%;
+    border-style: none;
+    border-bottom: 1px solid map.get($colors, faint-grey);
+    border-radius: 0;
+    font-size: 20px;
+    resize: none;
+    font-family: inherit;
+    padding: 10px 0;
+    background: transparent;
 
-      option:first-of-type {
-        color: map.get($colors, black);
-      }
-    }
-
-    ::placeholder {
+    &::placeholder {
       color: map.get($colors, faint-grey);
     }
+  }
+}
 
-    button {
-      width: 22vw;
-      height: 50px;
-      background-color: map.get($colors, violet);
-      border-style: none;
-      color: map.get($colors, white);
-      cursor: pointer;
-    }
+.errorInput {
+  border-bottom-color: map.get($colors, danger) !important;
+}
+
+.errorText {
+  color: map.get($colors, danger);
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
+
+.submitButton {
+  width: 22vw;
+  height: 50px;
+  background-color: map.get($colors, violet);
+  border-style: none;
+  color: map.get($colors, white);
+  cursor: pointer;
+  font-size: 20px;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    background-color: map.get($colors, faint-grey);
+    cursor: not-allowed;
   }
 }
