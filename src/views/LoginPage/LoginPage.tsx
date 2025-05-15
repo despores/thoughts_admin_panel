@@ -21,7 +21,7 @@ const LoginPage: React.FC = observer(() => {
             await authStore.login(email, password);
             navigate(ROUTES.MAIN);
         } catch (err) {
-            setError("Invalid email or password");
+            setError("Некорректная почта или пароль");
         }
     };
 
@@ -37,7 +37,7 @@ const LoginPage: React.FC = observer(() => {
                 <form onSubmit={handleSubmit}>
                     <input
                         type="email"
-                        placeholder="Email"
+                        placeholder="Почта"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         aria-label="Email"
@@ -45,7 +45,7 @@ const LoginPage: React.FC = observer(() => {
                     />
                     <input
                         type="password"
-                        placeholder="Password"
+                        placeholder="Пароль"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         aria-label="Password"
@@ -55,7 +55,7 @@ const LoginPage: React.FC = observer(() => {
                         type="submit"
                         disabled={authStore.isAuthInProgress}
                     >
-                        {authStore.isAuthInProgress ? "Logging in..." : "Login"}
+                        {authStore.isAuthInProgress ? "Вход в систему..." : "Вход"}
                     </button>
                 </form>
                 {error && <div className={styles.error}>{error}</div>}
