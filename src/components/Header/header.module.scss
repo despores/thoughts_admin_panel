@@ -6,6 +6,7 @@ $headerHeight: 15vh;
 .header {
   height: $headerHeight;
   background-color: map.get($colors, white);
+  min-width: 1100px;
 
   .content {
     display: flex;
