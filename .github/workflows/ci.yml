@@ -20,9 +20,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - name: Install dependencies
-        run: |
-          npm install -g cross-env webpack webpack-cli
-          npm ci
+        run: npm ci
       - name: Type Check
         run: npm run typecheck
       - name: Lint
