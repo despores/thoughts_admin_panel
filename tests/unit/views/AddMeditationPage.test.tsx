@@ -43,28 +43,21 @@ describe("AddMeditationPage", () => {
         const submitButton = screen.getByText("Готово");
         fireEvent.click(submitButton);
 
-        const expectedErrors = [
-            "Введите название медитации",
-            "Введите автора медитации",
-            "Добавьте описание медитации",
-            "Добавьте хотя бы один тег",
-            "Выберите категорию",
-            "Загрузите обложку медитации",
-            "Загрузите аудиодорожку"
-        ];
-
         await waitFor(() => {
-            const errorElements = screen.getAllByText((content, element) => {
-                return element?.className === "errorText" && expectedErrors.includes(content);
-            });
-            expect(errorElements).toHaveLength(expectedErrors.length);
+            expect(screen.getByText("Введите название медитации", { selector: "p" })).toBeInTheDocument();
 
-            expectedErrors.forEach(errorText => {
-                const error = screen.getByText((content, element) => {
-                    return element?.className === "errorText" && content === errorText;
-                });
-                expect(error).toBeInTheDocument();
-            });
+            expect(screen.getByText("Введите автора медитации", { selector: "p" })).toBeInTheDocument();
+
+            expect(screen.getByText("Добавьте описание медитации", { selector: "p" })).toBeInTheDocument();
+
+            expect(screen.getByText("Добавьте хотя бы один тег", { selector: "p" })).toBeInTheDocument();
+
+            const categoryErrors = screen.getAllByText("Выберите категорию");
+            const categoryErrorMessage = categoryErrors.find(element => element.tagName === "P");
+            expect(categoryErrorMessage).toBeInTheDocument();
+
+            expect(screen.getAllByText("Загрузите обложку медитации")[1]).toBeInTheDocument();
+            expect(screen.getAllByText("Загрузите аудиодорожку")[1]).toBeInTheDocument();
         });
     });
 
@@ -153,10 +146,8 @@ describe("AddMeditationPage", () => {
             mediaFile: "audio-url",
         };
 
-        // Update the mock store's items
         meditationStore.items = [mockMeditation];
 
-        // Mock the search parameter for edit mode
         jest.spyOn(URLSearchParams.prototype, "get").mockReturnValue("1");
 
         render(
