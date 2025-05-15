@@ -5,17 +5,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  padding: 50px 20px 0;
   margin-bottom: 2vh;
   height: 83vh;
   gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 
   a {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 12vh;
-    width: 93vw;
+    width: 100%;
     background-color: map.get($colors, light);
     gap: 10px;
     border: 1px dashed map.get($colors, light-grey);
