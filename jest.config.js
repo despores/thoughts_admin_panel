@@ -1,18 +1,17 @@
 module.exports = {
+  preset: "ts-jest",
   testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
   moduleNameMapper: {
-    // Handle CSS/SCSS imports
-    "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-    "\\.module\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-    // Handle image imports
-    "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+    "\\.(css|less|scss|sass)$": "<rootDir>/__mocks__/styleMock.js",
+    "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/__mocks__/fileMock.js",
   },
+  setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
+  testMatch: [
+    "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+    "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}",
+  ],
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest",
-    "^.+\\.(js|jsx)$": "babel-jest",
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-  coveragePathIgnorePatterns: ["/node_modules/", "/__tests__/", "/dist/"],
 };
