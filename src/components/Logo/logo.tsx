@@ -1,8 +1,13 @@
 import React from "react";
-import mainLogo from "../../assets/images/mainLogo.svg";
+import mainLogo from "../../assets/images/MainLogo.svg";
+import * as styles from "./logo.module.scss";
 
-export default function Logo() {
+const Logo = () => {
     return (
-        <img src={mainLogo} alt="Logo" />
+        <div className={styles.logo}>
+            <img src={mainLogo} alt="Logo" />
+        </div>
     );
-}
+};
+
+export default Logo;
